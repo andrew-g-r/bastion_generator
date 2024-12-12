@@ -4,7 +4,7 @@ a python script for generating careers and character stats from roll playing gam
 
 ## Description
 
-The script rolls character stats, and uses the data file to generate other characteristics
+The script rolls character stats, and uses the data file to generate other characteristics creating an object that inherits all the necessary information
 
 ## Using the script
 
