@@ -11,7 +11,7 @@ The script rolls character stats, and uses the data file to generate other chara
 * example usage:
 ```
 python -i bastion_generator.py
-jason = fail('json')
+jason = fail('jason')
 ```
 
 ### Dependencies
