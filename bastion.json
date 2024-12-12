@@ -1,0 +1,284 @@
+{
+    "career": [{
+            "id": "1",
+            "title": "GUTTER MINDER",
+            "desc": "You’re the bottom of the barrel. Bastion’s crust",
+            "sample_names": "HOPKIN, CORK, DERROW, JORGUN.",
+            "debt1": "IF YOU ARE THE YOUNGEST PLAYER, THE WHOLE GROUP IS £10K IN DEBT TO...",
+            "debt2": "Associated Reanimators: You all died and were re-animated. You are fully functional, but carry a chemical odour.",
+            "get": "YOU GET - Stick-hook (d6, BULKY), rags.",
+            "tables": {
+                "prompt1": "WHAT HAPPENED TO YOU?",
+                "table1": {
+                    "1": "You believed yourself to be some sort of Messiah. You are not.",
+                    "2": "Rat given human form in a lab experiment. You can still speak with rats and loosely understand other rodents.",
+                    "3": "You secretly have a wealthy family, and this lifestyle is your way of getting their attention.",
+                    "4": "You survived a street urchin upbringing, so you know everyone else in the gutter.",
+                    "5": "Former High Society Member, only survivor after a mob uprising.",
+                    "6": "Disgraced Professor of Oddity, expelled for controversial theories."
+                },
+                "prompt2": "WHAT ARE YOU HIDING UNDER YOUR RAGS?",
+                "table2": {
+                    "1": "Wish Tonic - Three measures of liquor that each grant a wish. The wish only lasts as long as the bracing kick of the liquor (d6 turns).",
+                    "2": "Dehydrated Beasts – Three rubbery things resembling toy animals. If thrown into water, it expands to a Soggy Monstrosity (15HP, d10 Trample).  When killed or there's nothing left to kill, the creature collapses into inert powder.",
+                    "3": "Berserker Gland - When you take ABILITY LOSS or suffer serious pain you fly into a rage. Your next melee attack is +d10 but you cannot make ranged attacks. Once the attack is out of your system you return to normal.",
+                    "4": "Parallel Shifter - A metal tin big enough to fit a pistol inside. If an object is placed inside and shaken, the object is replaced with a parallel version of itself from another reality. Roll d6. 1-2: Only ash remains. 3-4:The change is mainly cosmetic. 5-6:The new version is better than the old. Each item can only be shifted once.",
+                    "5": "Slaughter Brand - A three-pointed mark on your hand. When you kill a worthy opponent, one point turns darker. When all three points turn dark, your arm grows into an unnaturally strong, chitinous claw (d10 DAMAGE) for the next hour. When your arm returns, the brand resets.",
+                    "6": "Caged Biter - A bug-monkey creature (STR 7, 6HP, d6 bite) in a cage. Fights its designated target to the death, ignoring any other commands. If it wins, it eats some of its opponent before slinking back to its cage. If it loses, it becomes melancholy."
+                }
+            }
+        }, {
+            "id": "11",
+            "title": "LOST EXPEDITIONEER",
+            "desc": "You’ve been on a treasure hunting expedition before. You were the only survivor",
+            "sample_names": "UGO, BACKARA, LILLYHART, BASS.",
+            "debt1": "IF YOU ARE THE YOUNGEST PLAYER, THE WHOLE GROUP IS £10K IN DEBT TO...",
+            "debt2": "The Elephant Reimbursement House: Reclaimed ivory goods pay double their value against your debt.",
+            "get": "YOU GET - Pair of pistols (d6 each).",
+            "tables": {
+                "prompt1": "WHAT WAS YOUR POSITION ON THE CREW?",
+                "table1": {
+                    "1": "Archivist:Take a spyglass and writing set.",
+                    "2": "Counsellor:Take an aromatherapy kit.",
+                    "3": "Owl Tender:Take a trained owl (5HP, d4 claws).",
+                    "4": "Metallurgist:Take a bomb (d10 BLAST).",
+                    "5": "Butcher:Take a cleaver (d6).",
+                    "6": "Saucier:Take a set of tiny saucepans."
+                },
+                "prompt2": "WHAT DID YOU BRING BACK FROM THE EXPEDITION?",
+                "table2": {
+                    "1": "Preserved Soul – A tiny shrivelled humanoid. Can be thrown into a fire to release a flailing Alien apparition (d8 eye-beams, immaterial, lashes out for 1d6 turns before vanishing in a flash of light).",
+                    "2": "Fetch-Pearl – When thrown into a body of water, this silvery pearl sinks to the bottom and clings to the first thing it touches. On a mental command it returns to the surface, dragging up whatever it attached to.",
+                    "3": "Dire Barnacle – A vicious little mollusc (1HP, ARMOUR 1) that taunts quietly and explodes as a bomb (d12 BLAST) when it dies.",
+                    "4": "Savage Vine Berry – If eaten, vines erupt from the mouth (d6 STR loss) and grow into a sprawling mass, clinging to whatever surface they can. One use.",
+                    "5": "Ambrosia Seed – A bag of golden seed that no animal can resist if thrown.",
+                    "6": "Skeletal Dove – Carefully assembled. Can be crushed to unleash a cloud of confused doves."
+                }
+            }
+        }, {
+            "id": "21",
+            "title": "STAR BLESSED",
+            "desc": "You don’t just worship the Living Stars. One of them has gifted you",
+            "sample_names": "POLLUX, VEGA, RIGELLA, HAMAL.",
+            "debt1": "IF YOU ARE THE YOUNGEST PLAYER, THE WHOLE GROUP IS £10K IN DEBT TO...",
+            "debt2": "Baztuon Order of Vaultkeepers: You have shared ownership of a vault-buster bomb (d12, must be set in place).",
+            "get": "YOU GET - Mace (d6), ceremonial headband.",
+            "tables": {
+                "prompt1": "WHAT WAS YOUR DUTY WITHIN THE STAR-BLESSED UNION?",
+                "table1": {
+                    "1": "Preacher: Take a Star Book.",
+                    "2": "Bell Ringer: You can climb ropes really fast.",
+                    "3": "Sacrificial Executioner: Swap your mace for an executioner bludgeon (d8, BULKY).",
+                    "4": "Observer: Take a telescope and flask of chicken broth.",
+                    "5": "Flagellant: Take a whip (d6) and lash marks.",
+                    "6": "Cook: Take a cleaver (d6) and mass-catering certificate."
+                },
+                "prompt2": "WHAT’S YOUR STAR GIFT?",
+                "table2": {
+                    "1": "Broken Basilisk Symbol - Two pieces of an eye-like symbol set in lead. Anyone holding the pieces together while looking at it loses d20 CHA.",
+                    "2": "Wild Tongue - You can talk with any living thing, but what they tell you might not make sense.",
+                    "3": "Noble Tumour - This visible growth absorbs the next harmful effect to enter your body, whether poison, parasite, curse, or otherwise, before dropping off and turning to dust.",
+                    "4": "Alien Bone - Looks like a wishbone, but if broken sends out a psychic wave of pain to all within 10m (d20 CHA loss).",
+                    "5": "Air-Sac - A membranous sac on your chest that you can inflate to 2m in diameter. Your lungs can draw on the air within, but remember the inflated sac floats.",
+                    "6": "Saucer Burn - Tingles in the presence of artificial light. You can will yourself to levitate slowly towards the light."
+                }
+            }
+        }, {
+            "id": "31",
+            "title": "POLAR BOUNTY HUNTER",
+            "desc": "The endless polar mists are a great place to hide. You did your best to bring the lost home, one way or another",
+            "sample_names": "PODEL, VICHLER, WORFHAND, BEEGULL.",
+            "debt1": "IF YOU ARE THE YOUNGEST PLAYER, THE WHOLE GROUP IS £10K IN DEBT TO...",
+            "debt2": "Fictioneers: In their office is a large, empty book with your names written on the front. If you’re late paying your debt, the Fictioneers can make unpleasant things happen to you by writing them within.",
+            "get": "YOU GET - Pole axe (d8, BULKY).",
+            "tables": {
+                "prompt1": "JUST HOW TOUGH ARE YOU?",
+                "table1": {
+                    "1": "Take a Wolf (5HP, d6 bite) that follows your every command.",
+                    "2": "Take an Adoring Follower (1HP, club d6).",
+                    "3": "You can Whistle loud enough to cut through any noise, and over vast distances.",
+                    "4": "You’re Immune to alcohol and other toxins.",
+                    "5": "If you can pick up a container, you can Break It Open with just your hands and teeth.",
+                    "6": "Take an Eyepatch and a captivating story about how you got it."
+                },
+                "prompt2": "WHAT POWER DID THE MIST GRANT YOU?",
+                "table2": {
+                    "1": "Fogwhisper: As long as you make eye contact with another, they can hear anything you whisper.",
+                    "2": "Snowblood: You suffer no harm from extreme cold.",
+                    "3": "Iceclap: You can extinguish small flames with a loud clap.",
+                    "4": "Chillsight: You have white eyes, which people don’t like.",
+                    "5": "Mistlung: You can always see your breath.",
+                    "6": "Seathirst: You can only survive on saltwater. Freshwater doesn’t quench you."
+                }
+            }
+        }, {
+            "id": "41",
+            "title": "NEWSPAPER INTERN",
+            "desc": "You were technically paid to write technically-non-lies. It never really got off the ground",
+            "sample_names": "GURNEY, DUNKER, FLINDELL, SHELINA.",
+            "debt1": "IF YOU ARE THE YOUNGEST PLAYER, THE WHOLE GROUP IS £10K IN DEBT TO...",
+            "debt2": "Society for the Punishment of Wayward Students: Your debt is to pay for breakages you caused by some prank in your youth. You know a load of dumb code words that only you understand.",
+            "get": "YOU GET - Notepad.",
+            "tables": {
+                "prompt1": "WHAT WAS THE WORST STORY YOU HAD TO COVER?",
+                "table1": {
+                    "1": "Local Lizard Races: Take a slow disowned lizard (2HP).",
+                    "2": "Escaped Swan: Take a net.",
+                    "3": "Mine Collapse: Take a canary in a cage.",
+                    "4": "Snooker Tournament: Take a flask of very strong coffee.",
+                    "5": "Collapse of Order at a Zoo: Take a sack of animal feed.",
+                    "6": "Prison Riots: Take a pack of gum (bread) and a pair of handcuffs."
+                },
+                "prompt2": "WHAT DID YOU TAKE FROM THE PRESS OFFICE BEFORE YOUR INTERNSHIP ENDED?",
+                "table2": {
+                    "1": "Paper-Boy that has nowhere else to go (DEX 15, 2HP) and blindly obeys you.",
+                    "2": "Snubbed Shotgun (d6, +d6 at point blank range) from the editor’s office.",
+                    "3": "Sabre (d6) owned by some famous revolutionary.",
+                    "4": "Cricket Bat (d6, BULKY) signed by a disgraced general.",
+                    "5": "Letter Opener (d6) and a book of one-hour-delivery stamps.",
+                    "6": "Heavy Rod (d6, BULKY) from the printing press."
+                }
+            }
+        }, {
+            "id": "51",
+            "title": "FRONT OF HOUSE HOST",
+            "desc": "You were the face of a company. Now you’re a face without a company",
+            "sample_names": "SIXER, LEMMIN, TOTT, CHICO.",
+            "debt1": "IF YOU ARE THE YOUNGEST PLAYER, THE WHOLE GROUP IS £10K IN DEBT TO...",
+            "debt2": "Slugburn Pest Control: Take a very large pack of slug pellets.",
+            "get": "YOU GET - Knife (d6), apple.",
+            "tables": {
+                "prompt1": "WHO WAS YOUR EMPLOYER?",
+                "table1": {
+                    "1": "A Fighting Pit: Swap your knife for a heavy club (d8, BULKY).",
+                    "2": "A Taboo Restaurant: Take a tortoise shell.",
+                    "3": "A Day-Spa: Take a flattering mirror.",
+                    "4": "A Confectionery Factory: Take a bag of sherbet.",
+                    "5": "A Counterfeit Jeweller: Take a fake ruby (worth £1k to somebody unknowing).",
+                    "6": "A Floating Hotel: Take a portable buoy."
+                },
+                "prompt2": "WHAT MADE YOU MEMORABLE?",
+                "table2": {
+                    "1": "You Know Anybody’s Name just by looking at them.",
+                    "2": "You have a Photographic Memory.",
+                    "3": "You know a few Street Magic Tricks but nothing truly magical.",
+                    "4": "You resemble a Local Celebrity Entertainer.",
+                    "5": "On your first day, you attempted a Unique Accent and got stuck with it.",
+                    "6": "A Ridiculous Haircut."
+                }
+            }
+        }, {
+            "id": "61",
+            "title": "COUNCIL RUNNER",
+            "desc": "With so many councils, a runner is a position of some power. Now your time is finished",
+            "sample_names": "AMBRO, MAYTER, ROWBECK, JIETEK.",
+            "debt1": "IF YOU ARE THE YOUNGEST PLAYER, THE WHOLE GROUP IS £10K IN DEBT TO...",
+            "debt2": "Mayor Impanzi, Mock Chimp: A very serious local politician. Doesn’t want to acknowledge being a Mock Chimp. For whatever reason, you donated to his campaign.",
+            "get": "YOU GET - Running shoes, letter opener (d6).",
+            "tables": {
+                "prompt1": "WHAT’S THE BEST THING YOU LEARNED DURING YOUR TIME AS A RUNNER?",
+                "table1": {
+                    "1": "The Secret to Drinking Well. You can out-drink anyone.",
+                    "2": "The Quickest Way to the Underground from any point in Bastion.",
+                    "3": "Skip-Stride Technique. It looks ridiculous, but when you use it you can easily outrun the others in your group.",
+                    "4": "Courier-Throwing. You never miss a catch, or make a bad throw.",
+                    "5": "A few Code Words that get you a free ride on roughly half of Bastion’s transport enterprises.",
+                    "6": "The Intimate Nickname of a powerful local politician."
+                },
+                "prompt2": "WHAT DID YOU STEAL?",
+                "table2": {
+                    "1": "A very soft Feather Duster.",
+                    "2": "A turtle-shaped Cocktail Shaker.",
+                    "3": "A very loud Klaxon.",
+                    "4": "A fancy set of Cake Decorations.",
+                    "5": "An unconvincing Dummy Head.",
+                    "6": "A big, furry Caterpillar (harmless and stupid)."
+                }
+            }
+        }, {
+            "id": "71",
+            "title": "LIVING EXPERIMENT",
+            "desc": "You were deemed a success by the Machine that modified you. There were some side effects",
+            "sample_names": "FANTZA, KIT, BOBOB, LILBERT.",
+            "debt1": "IF YOU ARE THE YOUNGEST PLAYER, THE WHOLE GROUP IS £10K IN DEBT TO...",
+            "debt2": "Froth & Murk Oyster Farms: Take shared ownership of a mollusc mood clamp (clamp it over any shelled mollusc to get a general indicator of its mood, displayed as a colour).",
+            "get": "YOU GET - Crutch (d6, BULKY).",
+            "tables": {
+                "prompt1": "WHAT WAS THE EXPERIMENT?",
+                "table1": {
+                    "1": "They replaced your head with a functioning Metal Skull.",
+                    "2": "You can Breathe Black Fire (d8 BLAST) once between RESTS.",
+                    "3": "When you eat a piece of brain you Inherit a Memory.",
+                    "4": "Your saliva Burns Through Metal.",
+                    "5": "You have an Acute Sense of Smell, but have a literal dog-nose.",
+                    "6": "You can Control your Severed Body Parts and reattach them at will."
+                },
+                "prompt2": "ANY SIDE EFFECTS?",
+                "table2": {
+                    "1": "You have a Mechanical Voice that glitches occasionally.",
+                    "2": "You cannot willingly Touch Metal.",
+                    "3": "If you do not Take your Tonic each morning, you drop dead. You have a stash to last a lifetime hidden somewhere safe.",
+                    "4": "Total Amnesia of before the experiment.",
+                    "5": "Brain is the only meat that you can eat.",
+                    "6": "If you take CRITICAL DAMAGE you can only be roused by a Jolt of Electricity."
+                }
+            }
+        }, {
+            "id": "81",
+            "title": "ANIMAL VASSAL",
+            "desc": "You are property of an Animal Patron, but crave a human life. You know better than to displease your liege",
+            "sample_names": "SAPP, MINNRED, HOMIS, WAMMEL.",
+            "debt1": "IF YOU ARE THE YOUNGEST PLAYER, THE WHOLE GROUP IS £10K IN DEBT TO...",
+            "debt2": "The Standards Unification Office: You are bound by oath to use an obscure time system rather than more popular standards. None of you can read a normal clock or calendar.",
+            "get": "YOU GET - Dagger (d6, decorated to suit your patron), ridiculous garment marking you as property of an animal.",
+            "tables": {
+                "prompt1": "WHICH ANIMAL PATRON DID YOU SERVE?",
+                "table1": {
+                    "1": "The Bear Parliament: Seemingly no intelligence beyond normal bears, but they know that they own you.",
+                    "2": "A Mummified Platypus: Can communicate telepathically. Mostly desires food that it cannot eat.",
+                    "3": "A Big Old Evil Snake: Talks very slowly and weaves complex plots that never amount to anything.",
+                    "4": "Sea Turtle: Stuck in a tank somewhere. Speaks through a child translator.",
+                    "5": "A Talking Emu: Eloquent but stupid. Always carries their insubordination rod (d8).",
+                    "6": "Giant Mole: Delivers typed instructions, then burrows back underground."
+                },
+                "prompt2": "WHAT ERRAND HAVE YOU ABANDONED?",
+                "table2": {
+                    "1": "Capturing a Deserter: Take a blowgun and 3 tranquiliser darts (DEX SAVE to avoid sedation).",
+                    "2": "Hunting Down Somebody Known for Eating your Patron’s Species: Take a pistol (d6).",
+                    "3": "Retrieving a Specialist Food that they Love: Take one piece of fine food suitable for your patron.",
+                    "4": "Buying Fine Clothes for your Patron: Take a formal suit to fit them.",
+                    "5": "Delivering a Declaration of War to an Old Rival: Take a ceremonial bugle.",
+                    "6": "Punitive Pilgrimage to Repent for a Past Mistake: You are missing one eye."
+                }
+            }
+        }, {
+            "id": "91",
+            "title": "SUB-PERSON",
+            "desc": "You wandered dark places for too long, tormented by Machines. You came out less than human.",
+            "sample_names": "VEYRON, JEENE, OX, MARA.",
+            "debt1": "IF YOU ARE THE YOUNGEST PLAYER, THE WHOLE GROUP IS £10K IN DEBT TO...",
+            "debt2": "Captain Rumtutty’s Maritime Experience: You all have matching, poorly drawn, naval-themed tattoos.",
+            "get": "YOU GET - Pasty skin, flask of gear-oil, dagger (d6).",
+            "tables": {
+                "prompt1": "WHAT’S WRONG WITH YOU?",
+                "table1": {
+                    "1": "Feral Appetite: Cooked food is poison to you.",
+                    "2": "Ear Splitter: Your voice is awful, everybody hates it.",
+                    "3": "Tar Blooded: Your blood has turned black, sticky, and foul smelling.",
+                    "4": "Night Terrors: You always scream in your sleep.",
+                    "5": "Slug-Skin: You secrete a thin layer of slime across your whole body.",
+                    "6": "Atonal: You are DEPRIVED in the presence of tuneful music."
+                },
+                "prompt2": "SERIOUSLY, WHAT ELSE IS WRONG WITH YOU?",
+                "table2": {
+                    "1": "Weird things in the Underground Just LetYou Pass, if you don’t cause any fuss.",
+                    "2": "You’re Double-Jointed in a disgusting way.",
+                    "3": "Your saliva is Mildly Acidic, enough to dissolve paper.",
+                    "4": "Food Goes Bad if you possess it for more than a few minutes.",
+                    "5": "Your Bones make a Cracking Sound when you walk.",
+                    "6": "You’ve had your Teeth Pulled Out."
+                }
+            }
+        }
+    ]
+}
