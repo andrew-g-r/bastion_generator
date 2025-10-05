@@ -1,9 +1,10 @@
 import random
 import json
 import pprint
+from pathlib import Path
 
 #load json
-with open ('bastion_free.json', encoding='utf8') as f:
+with (Path(__file__).resolve().parent / 'bastion.json').open(encoding='utf8') as f:
     data = json.load(f)
 
 #return dice list of dice rolls from string <n>d<n> '3d6' rolls and dice faces
