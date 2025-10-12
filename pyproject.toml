@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=77,<83"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bastion-generator"
+version = "1.0.0"
+description = "Reproducible Electric Bastionland character and party generator"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{name = "Andrew Russell", email = "AndrewGRussell@gmail.com"}]
+dependencies = []
+
+[tool.setuptools]
+packages = ["bastion"]
+py-modules = ["bastion_generator"]
+
+[tool.setuptools.package-data]
+bastion = ["data/*.json"]
