@@ -1,85 +1,53 @@
-import random
-import json
+"""Compatibility API; new applications should import from bastion."""
 import pprint
-from pathlib import Path
+from bastion.catalog import load_catalog
+from bastion.dice import roll
+from bastion.generator import generate
 
-#load json
-with (Path(__file__).resolve().parent / 'bastion' / 'data' / 'careers.json').open(encoding='utf8') as f:
-    data = json.load(f)
+data = {'career': list(load_catalog().values())}
 
-#return dice list of dice rolls from string <n>d<n> '3d6' rolls and dice faces
-def roll(dice_string):
-    rolls, dice = map(int, dice_string.split('d'))
-    return [
-        random.randint(1, dice)
-        for _ in range(rolls)
-    ]
+def closest(k, lst=None):
+    choices = lst if lst is not None else list(range(1, 100, 10))
+    if not choices:
+        raise ValueError('At least one career ID is required')
+    return str(min(choices, key=lambda value: (abs(value-k), value)))
 
-#create dictionary of id strings    
-def closest(k, lst=[1,11,21,31,41,51,61,71,81,91]):
-    return str(lst[min(range(len(lst)), key = lambda i: abs(lst[i]-k))])
-
-#consult the table of failed careers based on lowest and highest of 3d6 stats    
-def make_job():
-    job_stats = stats()
-    if max(job_stats) >= 12:
-        job = (max(job_stats)%10*10)+2+min(min(job_stats),12)
-    elif max(job_stats) == 11:
-        job = 13+min(job_stats)
-    elif max(job_stats) == 10:
-        job = min(job_stats)+5
-    else:
-        job = min(job_stats)-2
-    job = closest(job)
-    return job, job_stats, roll('1d6'), roll('1d6'), roll('1d6'), roll('1d6')
-
-#create a table of 3 stats
 def stats():
-    stats = []
-    for i in range(3):
-        stats.append(sum(roll('3d6')))
-    return stats
+    return [sum(roll('3d6')) for _ in range(3)]
 
-#find career by id in json
 def json_seek(id_):
-    for p in data['career']:
-        if p['id'] == id_:
-            return p
+    return load_catalog().get(str(id_))
 
-#create the failed career objects
+def make_job():
+    c = generate()
+    return c.career_id, list(c.abilities), [c.hp], [c.money], roll('1d6'), roll('1d6')
+
 class fail:
     kind = 'Failed Career'
     def __init__(self, name):
+        c = generate(name)
         self.name = name
-        self.stats = make_job()
-        self.job = self.stats[0]
+        self.character = c
+        self.job = c.career_id
         self.job_data = json_seek(self.job)
-        self.job_title = self.job_data['title']
-        self.job_desc = self.job_data['desc']
-        self.job_get = self.job_data['get']
+        self.job_title = c.career
+        self.job_desc = c.description
+        self.job_get = c.equipment
         self.job_debt1 = self.job_data['debt1']
-        self.job_debt2 = self.job_data['debt2']
-        self.job_prompt1 = self.job_data['tables']['prompt1']
-        self.job_answer1 = self.job_data['tables']['table1'][str(self.stats[4][0])]
-        self.job_prompt2 = self.job_data['tables']['prompt2']
-        self.job_answer2 = self.job_data['tables']['table2'][str(self.stats[5][0])]
-        self.details()
-    def notes(self, notes):
-        self.notes = notes
+        self.job_debt2 = c.debt
+        self.job_prompt1, self.job_prompt2 = c.prompts
+        self.job_answer1, self.job_answer2 = c.answers
+        self.stats = (c.career_id, list(c.abilities), [c.hp], [c.money])
+        self.data = {'name':name, 'career':c.career, 'desc':c.description, 'stats':list(c.abilities),
+                     'hp':[c.hp], 'pocket money':[c.money], 'get':c.equipment,
+                     'debt1':self.job_debt1, 'debt2':c.debt, 'prompt1':c.prompts[0],
+                     'answer1':c.answers[0], 'prompt2':c.prompts[1], 'answer2':c.answers[1]}
+    def notes(self, text):
+        self.data['notes'] = str(text)
     def details(self):
-        job = self.stats
-        self.data = {
-        "career": self.job_title,
-        "desc": self.job_desc,
-        "stats": job[1],
-        "hp": job[2],
-        "pocket money":job[3],
-        "get": self.job_get,
-        "debt1": self.job_debt1,
-        "debt2": self.job_debt2,
-        "prompt1": self.job_prompt1,
-        "answer1": self.job_answer1,
-        "prompt2": self.job_prompt2,
-        "answer2": self.job_answer2,
-        }
         pprint.pp(self.data, sort_dicts=False)
+        return self.data
+
+if __name__ == '__main__':
+    from bastion.cli import main
+    raise SystemExit(main())
