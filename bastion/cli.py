@@ -4,7 +4,7 @@ import json
 import random
 import sys
 from . import __version__
-from .generator import generate
+from .party import generate_party
 
 def parser():
     root = argparse.ArgumentParser(description='Generate Electric Bastionland sample-career characters')
@@ -13,14 +13,16 @@ def parser():
     create = commands.add_parser('generate', help='Generate a character')
     create.add_argument('--name', default='Adventurer')
     create.add_argument('--seed', type=int)
+    create.add_argument('--count', type=int, default=1)
     return root
 
 def main(argv=None):
     root = parser()
     args = root.parse_args(argv)
     try:
-        character = generate(args.name, rng=random.Random(args.seed))
-        print(json.dumps(character.to_dict(), ensure_ascii=False, indent=2))
+        characters = generate_party(args.count, seed=args.seed, name=args.name)
+        data = characters[0].to_dict() if args.count == 1 else [c.to_dict() for c in characters]
+        print(json.dumps(data, ensure_ascii=False, indent=2))
         return 0
     except (ValueError, OSError) as error:
         root.exit(2, f'error: {error}\n')
