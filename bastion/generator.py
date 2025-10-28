@@ -14,12 +14,16 @@ def career_number(abilities):
         return low + 5
     return low - 2
 
-def generate(name='Adventurer', *, rng=None, catalog=None):
+def generate(name='Adventurer', *, rng=None, catalog=None, career=None):
     rng = rng if rng is not None else random.Random()
     catalog = catalog if catalog is not None else load_catalog()
     abilities = tuple(sum(roll('3d6', rng)) for _ in range(3))
     number = career_number(abilities)
     key = min(catalog, key=lambda k: (abs(int(k)-number), int(k)))
+    if career is not None:
+        key = str(career)
+        if key not in catalog:
+            raise ValueError(f'Unknown career ID: {key}')
     entry = catalog[key]
     hp, money, first, second = (roll('1d6', rng)[0] for _ in range(4))
     tables = entry['tables']

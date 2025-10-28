@@ -11,6 +11,10 @@ class GeneratorTests(unittest.TestCase):
     def test_original_mapping_boundary_cases(self):
         for abilities, expected in [((3,3,3),1), ((10,10,10),15), ((3,11,9),16), ((18,18,18),94)]:
             self.assertEqual(career_number(abilities), expected)
+    def test_explicit_career_and_unknown_id(self):
+        self.assertEqual(generate(career='91').career_id, '91')
+        with self.assertRaises(ValueError):
+            generate(career='404')
     def test_many_characters_preserve_starting_ranges(self):
         rng = random.Random(12)
         for _ in range(500):
