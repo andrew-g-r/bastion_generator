@@ -14,10 +14,12 @@ def career_number(abilities):
         return low + 5
     return low - 2
 
-def generate(name='Adventurer', *, rng=None, catalog=None, career=None):
+def generate(name='Adventurer', *, rng=None, catalog=None, career=None, abilities=None):
     rng = rng if rng is not None else random.Random()
     catalog = catalog if catalog is not None else load_catalog()
-    abilities = tuple(sum(roll('3d6', rng)) for _ in range(3))
+    abilities = tuple(sum(roll('3d6', rng)) for _ in range(3)) if abilities is None else tuple(abilities)
+    if len(abilities) != 3 or any(type(a) is not int or not 3 <= a <= 18 for a in abilities):
+        raise ValueError('Supply three abilities between 3 and 18')
     number = career_number(abilities)
     key = min(catalog, key=lambda k: (abs(int(k)-number), int(k)))
     if career is not None:

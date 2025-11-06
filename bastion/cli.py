@@ -13,6 +13,7 @@ def parser():
     create = commands.add_parser('generate', help='Generate a character')
     create.add_argument('--name', default='Adventurer')
     create.add_argument('--career', help='Choose a career ID from the catalog')
+    create.add_argument('--abilities', type=int, nargs=3, metavar=('STR','DEX','CHA'))
     create.add_argument('--seed', type=int)
     create.add_argument('--count', type=int, default=1)
     return root
@@ -21,7 +22,7 @@ def main(argv=None):
     root = parser()
     args = root.parse_args(argv)
     try:
-        characters = generate_party(args.count, seed=args.seed, name=args.name, career=args.career)
+        characters = generate_party(args.count, seed=args.seed, name=args.name, career=args.career, abilities=args.abilities)
         data = characters[0].to_dict() if args.count == 1 else [c.to_dict() for c in characters]
         print(json.dumps(data, ensure_ascii=False, indent=2))
         return 0
