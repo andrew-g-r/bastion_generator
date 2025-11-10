@@ -17,7 +17,7 @@ def parser():
     create.add_argument('--abilities', type=int, nargs=3, metavar=('STR','DEX','CHA'))
     create.add_argument('--seed', type=int)
     create.add_argument('--count', type=int, default=1)
-    create.add_argument('--format', choices=['json','text','markdown'], default='text')
+    create.add_argument('--format', choices=['json','text','markdown','jsonl','csv'], default='text')
     return root
 
 def main(argv=None):

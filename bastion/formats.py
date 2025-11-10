@@ -10,6 +10,18 @@ def text(character):
             f'\nGroup debt (if youngest): {c.debt}\nNotes: {c.notes}')
 
 def render(characters, format='json'):
+    if format == 'jsonl':
+        return '\n'.join(json.dumps(c.to_dict(), ensure_ascii=False) for c in characters)
+    if format == 'csv':
+        import csv
+        import io
+        output = io.StringIO()
+        writer = csv.writer(output)
+        writer.writerow(['name','career','STR','DEX','CHA','hp','money','notes'])
+        for c in characters:
+            row = [c.name,c.career,*c.abilities,c.hp,c.money,c.notes]
+            writer.writerow(["'"+v if isinstance(v,str) and v.startswith(('=','+','-','@','\t','\r')) else v for v in row])
+        return output.getvalue().rstrip('\r\n')
     if format == 'json':
         values = [c.to_dict() for c in characters]
         return json.dumps(values[0] if len(values) == 1 else values, ensure_ascii=False, indent=2)
