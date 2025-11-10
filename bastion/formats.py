@@ -13,6 +13,20 @@ def render(characters, format='json'):
     if format == 'json':
         values = [c.to_dict() for c in characters]
         return json.dumps(values[0] if len(values) == 1 else values, ensure_ascii=False, indent=2)
+    if format == 'markdown':
+        return '\n\n---\n\n'.join(markdown(c) for c in characters)
     if format == 'text':
         return '\n\n' .join(text(c) for c in characters)
     raise ValueError(f'Unknown output format: {format}')
+
+
+def markdown(c):
+    def escape(value):
+        import re
+        return re.sub(r'([\\`*_{}\[\]<>()#+.!|>~-])', r'\\\1', value)
+    return (f'# {escape(c.name)}\n\n## {escape(c.career)}\n\n'
+            f'| STR | DEX | CHA | HP | £ |\n| --- | --- | --- | --- | --- |\n'
+            f'| {c.abilities[0]} | {c.abilities[1]} | {c.abilities[2]} | {c.hp} | {c.money} |\n\n'
+            + '\n\n'.join(escape(value) for value in [c.description, c.equipment,
+              *[item for pair in zip(c.prompts,c.answers) for item in pair],
+              'Group debt (if youngest): '+c.debt, 'Notes: '+c.notes]))
