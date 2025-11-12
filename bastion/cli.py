@@ -6,6 +6,7 @@ import sys
 from . import __version__
 from .party import generate_party
 from .formats import render
+from .storage import save
 
 def parser():
     root = argparse.ArgumentParser(description='Generate Electric Bastionland sample-career characters')
@@ -13,6 +14,8 @@ def parser():
     commands = root.add_subparsers(dest='command', required=True)
     create = commands.add_parser('generate', help='Generate a character')
     create.add_argument('--name', default='Adventurer')
+    create.add_argument('--output', help='Save to a file instead of stdout')
+    create.add_argument('--force', action='store_true', help='Replace an existing output file')
     create.add_argument('--career', help='Choose a career ID from the catalog')
     create.add_argument('--abilities', type=int, nargs=3, metavar=('STR','DEX','CHA'))
     create.add_argument('--seed', type=int)
@@ -25,7 +28,11 @@ def main(argv=None):
     args = root.parse_args(argv)
     try:
         characters = generate_party(args.count, seed=args.seed, name=args.name, career=args.career, abilities=args.abilities)
-        print(render(characters, args.format))
+        output = render(characters, args.format)
+        if args.output:
+            save(args.output, output, force=args.force)
+        else:
+            print(output)
         return 0
     except (ValueError, OSError) as error:
         root.exit(2, f'error: {error}\n')
