@@ -14,7 +14,7 @@ def career_number(abilities):
         return low + 5
     return low - 2
 
-def generate(name='Adventurer', *, rng=None, catalog=None, career=None, abilities=None):
+def generate(name='Adventurer', *, rng=None, catalog=None, career=None, abilities=None, random_name=False):
     rng = rng if rng is not None else random.Random()
     catalog = catalog if catalog is not None else load_catalog()
     abilities = tuple(sum(roll('3d6', rng)) for _ in range(3)) if abilities is None else tuple(abilities)
@@ -28,6 +28,11 @@ def generate(name='Adventurer', *, rng=None, catalog=None, career=None, abilitie
             raise ValueError(f'Unknown career ID: {key}')
     entry = catalog[key]
     hp, money, first, second = (roll('1d6', rng)[0] for _ in range(4))
+    if random_name:
+        names = [part.strip().strip('.') for part in entry['sample_names'].split(',') if part.strip().strip('.')]
+        if not names:
+            raise ValueError(f'Career {key} has no sample names')
+        name = rng.choice(names).title()
     tables = entry['tables']
     return Character(name, abilities, hp, money, key, entry['title'], entry['desc'], entry['get'],
                      entry['debt2'], (tables['prompt1'], tables['prompt2']),

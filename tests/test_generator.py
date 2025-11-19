@@ -11,6 +11,10 @@ class GeneratorTests(unittest.TestCase):
     def test_original_mapping_boundary_cases(self):
         for abilities, expected in [((3,3,3),1), ((10,10,10),15), ((3,11,9),16), ((18,18,18),94)]:
             self.assertEqual(career_number(abilities), expected)
+    def test_sample_names_follow_the_seed(self):
+        a = generate(random_name=True, rng=random.Random(12))
+        self.assertNotEqual(a.name, 'Adventurer')
+        self.assertEqual(a, generate(random_name=True, rng=random.Random(12)))
     def test_manual_abilities_are_preserved(self):
         self.assertEqual(generate(abilities=(3, 12, 18)).abilities, (3, 12, 18))
         with self.assertRaises(ValueError):

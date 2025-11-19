@@ -19,6 +19,7 @@ def parser():
     create.add_argument('--career', help='Choose a career ID from the catalog')
     create.add_argument('--abilities', type=int, nargs=3, metavar=('STR','DEX','CHA'))
     create.add_argument('--seed', type=int)
+    create.add_argument('--random-name', action='store_true', help='Use a career-specific sample name')
     create.add_argument('--count', type=int, default=1)
     create.add_argument('--format', choices=['json','text','markdown','jsonl','csv'], default='text')
     return root
@@ -27,7 +28,7 @@ def main(argv=None):
     root = parser()
     args = root.parse_args(argv)
     try:
-        characters = generate_party(args.count, seed=args.seed, name=args.name, career=args.career, abilities=args.abilities)
+        characters = generate_party(args.count, seed=args.seed, name=args.name, career=args.career, abilities=args.abilities, random_name=args.random_name)
         output = render(characters, args.format)
         if args.output:
             save(args.output, output, force=args.force)
