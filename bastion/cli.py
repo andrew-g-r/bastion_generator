@@ -7,6 +7,7 @@ from . import __version__
 from .party import generate_party, party_summary
 from .formats import render
 from .storage import save
+from .catalog import load_catalog
 
 def parser():
     root = argparse.ArgumentParser(description='Generate Electric Bastionland sample-career characters')
@@ -24,12 +25,18 @@ def parser():
     create.add_argument('--random-name', action='store_true', help='Use a career-specific sample name')
     create.add_argument('--count', type=int, default=1)
     create.add_argument('--format', choices=['json','text','markdown','jsonl','csv'], default='text')
+    careers = commands.add_parser('careers', help='List or search available careers')
+    careers.add_argument('--search', default='')
     return root
 
 def main(argv=None):
     root = parser()
     args = root.parse_args(argv)
     try:
+        if args.command == 'careers':
+            entries = load_catalog().values()
+            print('\n'.join(f"{entry['id']:>3}  {entry['title']}" for entry in entries if args.search.casefold() in entry['title'].casefold()))
+            return 0
         characters = generate_party(args.count, seed=args.seed, name=args.name, career=args.career, abilities=args.abilities, random_name=args.random_name)
         output = json.dumps(party_summary(characters, args.youngest), ensure_ascii=False, indent=2) if args.party_summary else render(characters, args.format)
         if args.output:
