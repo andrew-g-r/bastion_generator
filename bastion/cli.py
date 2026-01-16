@@ -27,17 +27,24 @@ def parser():
     create.add_argument('--format', choices=['json','text','markdown','jsonl','csv'], default='text')
     careers = commands.add_parser('careers', help='List or search available careers')
     careers.add_argument('--search', default='')
+    validate = commands.add_parser('validate', help='Validate a custom or bundled career catalog')
+    for command in (create, careers, validate):
+        command.add_argument('--catalog', help='Path to a career catalog JSON file')
     return root
 
 def main(argv=None):
     root = parser()
     args = root.parse_args(argv)
     try:
+        catalog = load_catalog(args.catalog)
+        if args.command == 'validate':
+            print(f'Valid catalog: {len(catalog)} careers')
+            return 0
         if args.command == 'careers':
-            entries = load_catalog().values()
+            entries = catalog.values()
             print('\n'.join(f"{entry['id']:>3}  {entry['title']}" for entry in entries if args.search.casefold() in entry['title'].casefold()))
             return 0
-        characters = generate_party(args.count, seed=args.seed, name=args.name, career=args.career, abilities=args.abilities, random_name=args.random_name)
+        characters = generate_party(args.count, seed=args.seed, name=args.name, catalog=catalog, career=args.career, abilities=args.abilities, random_name=args.random_name)
         output = json.dumps(party_summary(characters, args.youngest), ensure_ascii=False, indent=2) if args.party_summary else render(characters, args.format)
         if args.output:
             save(args.output, output, force=args.force)
