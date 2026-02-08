@@ -6,7 +6,7 @@ import sys
 from . import __version__
 from .party import generate_party, party_summary
 from .formats import render
-from .storage import save
+from .storage import save, load_characters
 from .catalog import load_catalog
 
 def parser():
@@ -30,12 +30,24 @@ def parser():
     validate = commands.add_parser('validate', help='Validate a custom or bundled career catalog')
     for command in (create, careers, validate):
         command.add_argument('--catalog', help='Path to a career catalog JSON file')
+    convert = commands.add_parser('render', help='Render saved JSON characters in another format')
+    convert.add_argument('source')
+    convert.add_argument('--format', choices=['json','text','markdown','jsonl','csv'], default='text')
+    convert.add_argument('--output')
+    convert.add_argument('--force', action='store_true')
     return root
 
 def main(argv=None):
     root = parser()
     args = root.parse_args(argv)
     try:
+        if args.command == 'render':
+            output = render(load_characters(args.source), args.format)
+            if args.output:
+                save(args.output, output, force=args.force)
+            else:
+                print(output)
+            return 0
         catalog = load_catalog(args.catalog)
         if args.command == 'validate':
             print(f'Valid catalog: {len(catalog)} careers')
