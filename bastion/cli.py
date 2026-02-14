@@ -35,12 +35,22 @@ def parser():
     convert.add_argument('--format', choices=['json','text','markdown','jsonl','csv'], default='text')
     convert.add_argument('--output')
     convert.add_argument('--force', action='store_true')
+    annotate = commands.add_parser('annotate', help='Set notes on saved characters')
+    annotate.add_argument('source')
+    annotate.add_argument('--notes', required=True)
+    annotate.add_argument('--output', required=True)
+    annotate.add_argument('--force', action='store_true')
     return root
 
 def main(argv=None):
     root = parser()
     args = root.parse_args(argv)
     try:
+        if args.command == 'annotate':
+            from dataclasses import replace
+            characters = [replace(c, notes=args.notes) for c in load_characters(args.source)]
+            save(args.output, render(characters, 'json'), force=args.force)
+            return 0
         if args.command == 'render':
             output = render(load_characters(args.source), args.format)
             if args.output:
