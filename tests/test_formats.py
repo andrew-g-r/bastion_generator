@@ -4,6 +4,10 @@ from bastion.formats import render
 from bastion.generator import generate
 
 class FormatTests(unittest.TestCase):
+    def test_html_never_interprets_names_as_markup(self):
+        output = render([generate('<script>alert(1)</script>')], 'html')
+        self.assertIn('&lt;script&gt;', output)
+        self.assertNotIn('<script>', output)
     def test_csv_defuses_formulas_and_preserves_commas(self):
         import csv, io
         rows = list(csv.reader(io.StringIO(render([generate('=sum(1,2)')], 'csv'))))
