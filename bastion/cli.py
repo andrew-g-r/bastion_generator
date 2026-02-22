@@ -40,12 +40,20 @@ def parser():
     annotate.add_argument('--notes', required=True)
     annotate.add_argument('--output', required=True)
     annotate.add_argument('--force', action='store_true')
+    dice = commands.add_parser('roll', help='Roll a bounded NdM expression')
+    dice.add_argument('expression')
+    dice.add_argument('--seed', type=int)
     return root
 
 def main(argv=None):
     root = parser()
     args = root.parse_args(argv)
     try:
+        if args.command == 'roll':
+            from .dice import roll
+            values = roll(args.expression, random.Random(args.seed))
+            print(json.dumps({'rolls':values, 'total':sum(values)}))
+            return 0
         if args.command == 'annotate':
             from dataclasses import replace
             characters = [replace(c, notes=args.notes) for c in load_characters(args.source)]
