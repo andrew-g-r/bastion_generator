@@ -28,7 +28,8 @@ def parser():
     careers = commands.add_parser('careers', help='List or search available careers')
     careers.add_argument('--search', default='')
     validate = commands.add_parser('validate', help='Validate a custom or bundled career catalog')
-    for command in (create, careers, validate):
+    odds = commands.add_parser('odds', help='Exact probabilities for the sample career mapping')
+    for command in (create, careers, validate, odds):
         command.add_argument('--catalog', help='Path to a career catalog JSON file')
     convert = commands.add_parser('render', help='Render saved JSON characters in another format')
     convert.add_argument('source')
@@ -67,6 +68,10 @@ def main(argv=None):
                 print(output)
             return 0
         catalog = load_catalog(args.catalog)
+        if args.command == 'odds':
+            from .odds import career_probabilities
+            print(json.dumps(career_probabilities(catalog), indent=2))
+            return 0
         if args.command == 'validate':
             print(f'Valid catalog: {len(catalog)} careers')
             return 0
