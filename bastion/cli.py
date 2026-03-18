@@ -44,12 +44,22 @@ def parser():
     dice = commands.add_parser('roll', help='Roll a bounded NdM expression')
     dice.add_argument('expression')
     dice.add_argument('--seed', type=int)
+    diff = commands.add_parser('compare', help='Compare two saved character revisions')
+    diff.add_argument('before')
+    diff.add_argument('after')
     return root
 
 def main(argv=None):
     root = parser()
     args = root.parse_args(argv)
     try:
+        if args.command == 'compare':
+            from .compare import compare
+            before, after = load_characters(args.before), load_characters(args.after)
+            if len(before) != 1 or len(after) != 1:
+                raise ValueError('Compare accepts one character in each file')
+            print(json.dumps(compare(before[0], after[0]), ensure_ascii=False, indent=2))
+            return 0
         if args.command == 'roll':
             from .dice import roll
             values = roll(args.expression, random.Random(args.seed))
