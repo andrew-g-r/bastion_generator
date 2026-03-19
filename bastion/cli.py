@@ -47,12 +47,20 @@ def parser():
     diff = commands.add_parser('compare', help='Compare two saved character revisions')
     diff.add_argument('before')
     diff.add_argument('after')
+    server = commands.add_parser('serve', help='Open the local browser generator')
+    server.add_argument('--port', type=int, default=8765)
     return root
 
 def main(argv=None):
     root = parser()
     args = root.parse_args(argv)
     try:
+        if args.command == 'serve':
+            from .web import serve
+            if not 0 <= args.port <= 65535:
+                raise ValueError('Port must be between 0 and 65535')
+            serve(args.port)
+            return 0
         if args.command == 'compare':
             from .compare import compare
             before, after = load_characters(args.before), load_characters(args.after)
