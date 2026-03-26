@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bastion — Character Workshop</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body><main><header><p class="eyebrow">ELECTRIC BASTIONLAND · TABLETOP TOOLS</p><h1>A bad career.<br>A good beginning.</h1>
+<p>Roll a character, assemble a crew, and head into Bastion. Ten sample careers, no account required.</p></header>
+<form id="generator"><label>Character name<input name="name" value="Adventurer" maxlength="200" required></label>
+<label>Career<select name="career" id="career"><option value="">Let the dice decide</option></select></label>
+<label>Characters<input name="count" type="number" min="1" max="20" value="1" required></label>
+<label>Seed <span>(optional)</span><input name="seed" type="number" step="1" placeholder="Repeat a roll"></label>
+<label class="check"><input type="checkbox" name="random_name"> Use career sample names</label>
+<button type="submit">Roll the dice</button></form>
+<p id="status" role="status" aria-live="polite">Your next character starts here.</p>
+<section id="results" aria-label="Generated characters"></section>
+<footer>Unofficial fan tool. Career selection uses this project's nearest sample-career mapping; consult the game for the full rules.</footer>
+</main></body></html>

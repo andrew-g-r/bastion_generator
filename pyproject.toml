@@ -19,4 +19,4 @@ packages = ["bastion"]
 py-modules = ["bastion_generator"]
 
 [tool.setuptools.package-data]
-bastion = ["data/*.json"]
+bastion = ["data/*.json", "web/*.html", "web/*.js", "web/*.css"]
