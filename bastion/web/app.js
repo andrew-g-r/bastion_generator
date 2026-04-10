@@ -11,6 +11,8 @@ function element(tag, text, className) {
 }
 function display() {
   results.replaceChildren();
+  document.querySelector('#download').disabled = !characters.length;
+  document.querySelector('#print').disabled = !characters.length;
   for (const c of characters) {
     const card = element('article');
     card.append(element('h2', c.name), element('h3', c.career));
@@ -48,3 +50,11 @@ fetch('/api/careers').then(response => response.json()).then(careers => {
     document.querySelector('#career').append(option);
   }
 }).catch(() => { status.textContent = 'Could not load careers. Refresh to try again.'; });
+
+document.querySelector('#download').addEventListener('click', () => {
+  const url = URL.createObjectURL(new Blob([JSON.stringify(characters, null, 2)], {type:'application/json'}));
+  const link = element('a');
+  link.href = url; link.download = 'bastion-party.json'; link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+document.querySelector('#print').addEventListener('click', () => window.print());
