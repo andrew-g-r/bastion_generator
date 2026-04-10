@@ -58,3 +58,37 @@ document.querySelector('#download').addEventListener('click', () => {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
 document.querySelector('#print').addEventListener('click', () => window.print());
+
+document.querySelector('#save-roster').addEventListener('click', () => {
+  try {
+    if (!characters.length) throw new Error('Roll a party first.');
+    localStorage.setItem('bastion-party-v1', JSON.stringify(characters));
+    status.textContent = 'Party saved in this browser.';
+  } catch (error) { status.textContent = error.message; }
+});
+document.querySelector('#load-roster').addEventListener('click', () => {
+  try {
+    const saved = localStorage.getItem('bastion-party-v1');
+    if (!saved) throw new Error('No party has been saved in this browser.');
+    characters = validateCharacters(JSON.parse(saved)); display();
+    status.textContent = 'Saved party restored.';
+  } catch (error) { status.textContent = error.message; }
+});
+document.querySelector('#clear-roster').addEventListener('click', () => {
+  try { localStorage.removeItem('bastion-party-v1'); status.textContent = 'Saved party removed from this browser.'; }
+  catch (error) { status.textContent = error.message; }
+});
+function validateCharacters(data) {
+  const items = Array.isArray(data) ? data : [data];
+  if (!items.length || items.length > 20) throw new Error('Load between 1 and 20 characters.');
+  for (const c of items) {
+    if (!c || c.schema_version !== 1 || !Array.isArray(c.abilities) || c.abilities.length !== 3 ||
+        !c.abilities.every(a => Number.isInteger(a) && a >= 3 && a <= 18) ||
+        !Number.isInteger(c.hp) || c.hp < 1 || c.hp > 6 || !Number.isInteger(c.money) || c.money < 1 || c.money > 6 ||
+        !Array.isArray(c.prompts) || c.prompts.length !== 2 || !Array.isArray(c.answers) || c.answers.length !== 2 ||
+        ![c.name,c.career,c.description,c.equipment,c.debt,...c.prompts,...c.answers].every(v => typeof v === 'string')) {
+      throw new Error('Invalid character file. Use a version 1 Bastion JSON export.');
+    }
+  }
+  return items;
+}
