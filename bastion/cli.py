@@ -20,6 +20,7 @@ def parser():
     create.add_argument('--career', help='Choose a career ID from the catalog')
     create.add_argument('--abilities', type=int, nargs=3, metavar=('STR','DEX','CHA'))
     create.add_argument('--seed', type=int)
+    create.add_argument('--manifest', action='store_true', help='Include seed and catalog fingerprint in JSON output')
     create.add_argument('--party-summary', action='store_true', help='Output party totals and group debt as JSON')
     create.add_argument('--youngest', type=int, default=1, help='1-based youngest player index for group debt')
     create.add_argument('--random-name', action='store_true', help='Use a career-specific sample name')
@@ -97,8 +98,13 @@ def main(argv=None):
             entries = catalog.values()
             print('\n'.join(f"{entry['id']:>3}  {entry['title']}" for entry in entries if args.search.casefold() in entry['title'].casefold()))
             return 0
-        characters = generate_party(args.count, seed=args.seed, name=args.name, catalog=catalog, career=args.career, abilities=args.abilities, random_name=args.random_name)
+        seed = args.seed if args.seed is not None else random.SystemRandom().randrange(2**63)
+        characters = generate_party(args.count, seed=seed, name=args.name, catalog=catalog, career=args.career, abilities=args.abilities, random_name=args.random_name)
         output = json.dumps(party_summary(characters, args.youngest), ensure_ascii=False, indent=2) if args.party_summary else render(characters, args.format)
+        if args.manifest:
+            import hashlib
+            fingerprint = hashlib.sha256(json.dumps(catalog,sort_keys=True).encode()).hexdigest()
+            output = json.dumps({'schema_version':1, 'generator_version':__version__, 'seed':seed, 'catalog_sha256':fingerprint, 'characters':[c.to_dict() for c in characters]}, ensure_ascii=False, indent=2)
         if args.output:
             save(args.output, output, force=args.force)
         else:

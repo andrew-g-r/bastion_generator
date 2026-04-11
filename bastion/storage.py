@@ -29,6 +29,10 @@ def load_characters(path):
     if source.stat().st_size > 5_000_000:
         raise ValueError('Character file exceeds the 5 MB limit')
     raw = json.loads(source.read_text(encoding='utf-8'))
+    if isinstance(raw, dict) and 'characters' in raw:
+        if raw.get('schema_version') != 1:
+            raise ValueError('Unsupported party manifest version')
+        raw = raw['characters']
     items = raw if isinstance(raw, list) else [raw]
     if not 1 <= len(items) <= 1000:
         raise ValueError('Character files must contain 1–1000 characters')
