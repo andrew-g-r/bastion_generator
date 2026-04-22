@@ -110,7 +110,7 @@ def main(argv=None):
         else:
             print(output)
         return 0
-    except (ValueError, OSError) as error:
-        root.exit(2, f'error: {error}\n')
     except BrokenPipeError:
         return 0
+    except (ValueError, OSError) as error:
+        root.exit(2, f'error: {error}\n')
