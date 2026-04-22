@@ -92,3 +92,15 @@ function validateCharacters(data) {
   }
   return items;
 }
+
+document.querySelector('#import').addEventListener('change', async event => {
+  try {
+    const file = event.target.files[0];
+    if (!file) return;
+    if (file.size > 5_000_000) throw new Error('Character files must be smaller than 5 MB.');
+    const data = JSON.parse(await file.text());
+    characters = validateCharacters(data.characters || data); display();
+    status.textContent = `${characters.length} saved characters imported.`;
+  } catch (error) { status.textContent = error.message; }
+  finally { event.target.value = ''; }
+});
