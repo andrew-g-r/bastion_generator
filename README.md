@@ -21,6 +21,7 @@ bastion generate --count 4 --seed 42 --party-summary --youngest 2
 bastion annotate party.json --notes 'Met the vaultkeeper' --output party-notes.json
 bastion careers --search expedition
 bastion validate
+bastion doctor
 bastion roll 3d6 --seed 42
 bastion odds
 ```

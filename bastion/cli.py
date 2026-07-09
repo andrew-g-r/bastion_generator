@@ -50,12 +50,17 @@ def parser():
     diff.add_argument('after')
     server = commands.add_parser('serve', help='Open the local browser generator')
     server.add_argument('--port', type=int, default=8765)
+    commands.add_parser('doctor', help='Check the local installation and bundled data')
     return root
 
 def main(argv=None):
     root = parser()
     args = root.parse_args(argv)
     try:
+        if args.command == 'doctor':
+            from .catalog import DEFAULT_CATALOG
+            print(json.dumps({'version':__version__, 'python':sys.version.split()[0], 'careers':len(load_catalog()), 'catalog':str(DEFAULT_CATALOG), 'runtime_dependencies':[]}, indent=2))
+            return 0
         if args.command == 'serve':
             from .web import serve
             if not 0 <= args.port <= 65535:
