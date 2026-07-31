@@ -1,12 +1,19 @@
 """A loopback-only, dependency-free character generation server."""
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
+from socketserver import TCPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 from .party import generate_party
 from .catalog import load_catalog
 
 ASSETS = Path(__file__).with_name('web')
+
+class LocalServer(ThreadingHTTPServer):
+    def server_bind(self):
+        TCPServer.server_bind(self)
+        self.server_name = 'localhost'
+        self.server_port = self.server_address[1]
 
 def make_server(port=8765):
     catalog = load_catalog()
@@ -52,7 +59,7 @@ def make_server(port=8765):
                 self.respond(404, '{"error":"Not found"}')
             except (ValueError, OSError) as error:
                 self.respond(400, json.dumps({'error':str(error)}))
-    return ThreadingHTTPServer(('127.0.0.1', port), Handler)
+    return LocalServer(('127.0.0.1', port), Handler)
 
 def serve(port=8765):
     with make_server(port) as server:
