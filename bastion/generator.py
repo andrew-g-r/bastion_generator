@@ -1,8 +1,11 @@
 """Character generation using the original sample-career mapping."""
+
 import random
+
 from .catalog import load_catalog
 from .character import Character
 from .dice import roll
+
 
 def career_number(abilities):
     low, high = min(abilities), max(abilities)
@@ -14,26 +17,45 @@ def career_number(abilities):
         return low + 5
     return low - 2
 
-def generate(name='Adventurer', *, rng=None, catalog=None, career=None, abilities=None, random_name=False):
+
+def generate(
+    name="Adventurer", *, rng=None, catalog=None, career=None, abilities=None, random_name=False
+):
     rng = rng if rng is not None else random.Random()
     catalog = catalog if catalog is not None else load_catalog()
-    abilities = tuple(sum(roll('3d6', rng)) for _ in range(3)) if abilities is None else tuple(abilities)
+    abilities = (
+        tuple(sum(roll("3d6", rng)) for _ in range(3)) if abilities is None else tuple(abilities)
+    )
     if len(abilities) != 3 or any(type(a) is not int or not 3 <= a <= 18 for a in abilities):
-        raise ValueError('Supply three abilities between 3 and 18')
+        raise ValueError("Supply three abilities between 3 and 18")
     number = career_number(abilities)
-    key = min(catalog, key=lambda k: (abs(int(k)-number), int(k)))
+    key = min(catalog, key=lambda k: (abs(int(k) - number), int(k)))
     if career is not None:
         key = str(career)
         if key not in catalog:
-            raise ValueError(f'Unknown career ID: {key}')
+            raise ValueError(f"Unknown career ID: {key}")
     entry = catalog[key]
-    hp, money, first, second = (roll('1d6', rng)[0] for _ in range(4))
+    hp, money, first, second = (roll("1d6", rng)[0] for _ in range(4))
     if random_name:
-        names = [part.strip().strip('.') for part in entry['sample_names'].split(',') if part.strip().strip('.')]
+        names = [
+            part.strip().strip(".")
+            for part in entry["sample_names"].split(",")
+            if part.strip().strip(".")
+        ]
         if not names:
-            raise ValueError(f'Career {key} has no sample names')
+            raise ValueError(f"Career {key} has no sample names")
         name = rng.choice(names).title()
-    tables = entry['tables']
-    return Character(name, abilities, hp, money, key, entry['title'], entry['desc'], entry['get'],
-                     entry['debt2'], (tables['prompt1'], tables['prompt2']),
-                     (tables['table1'][str(first)], tables['table2'][str(second)]))
+    tables = entry["tables"]
+    return Character(
+        name,
+        abilities,
+        hp,
+        money,
+        key,
+        entry["title"],
+        entry["desc"],
+        entry["get"],
+        entry["debt2"],
+        (tables["prompt1"], tables["prompt2"]),
+        (tables["table1"][str(first)], tables["table2"][str(second)]),
+    )
