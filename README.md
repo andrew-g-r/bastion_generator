@@ -28,7 +28,7 @@ bastion odds
 
 Formats: `text`, `json`, `jsonl`, `csv`, `markdown`, `html`. `--output` refuses to replace a file unless `--force` is given. CSV text is escaped to prevent spreadsheet formulas. `compare BEFORE AFTER` compares two single-character JSON saves. All commands have `--help`.
 
-A JSON manifest records the actual random seed, generator version, and catalog fingerprint. The same seed, generator version, catalog, and generation options reproduce a party. `--random-name` uses names from that character's career table. Repeated sample names are possible.
+A JSON manifest records the actual random seed, generation options, generator version, and catalog fingerprint. The same seed, generator version, catalog, and generation options reproduce a party. `--random-name` uses names from that character's career table. Repeated sample names are possible.
 
 ## Rules and content
 

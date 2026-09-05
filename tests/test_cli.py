@@ -19,6 +19,14 @@ class CLITests(unittest.TestCase):
             self.run_cli("generate", "--name", "Mira", "--seed", "42", "--format", "json").stdout,
         )
 
+    def test_manifest_includes_generation_options(self):
+        result = self.run_cli('generate','--manifest','--career','11','--random-name','--abilities','8','9','10')
+        data = json.loads(result.stdout)
+        self.assertEqual(data['options']['career'],'11')
+        self.assertEqual(data['options']['abilities'],[8,9,10])
+        self.assertTrue(data['options']['random_name'])
+        self.assertEqual(self.run_cli('generate','--manifest','--party-summary').returncode,2)
+
     def test_manifest_records_a_reusable_seed(self):
         result = self.run_cli("generate", "--manifest")
         self.assertEqual(result.returncode, 0, result.stderr)

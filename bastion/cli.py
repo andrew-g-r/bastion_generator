@@ -146,6 +146,8 @@ def main(argv=None):
                 )
             )
             return 0
+        if args.manifest and args.party_summary:
+            raise ValueError('Choose either a reproducibility manifest or a party summary')
         seed = args.seed if args.seed is not None else random.SystemRandom().randrange(2**63)
         characters = generate_party(
             args.count,
@@ -171,6 +173,8 @@ def main(argv=None):
                     "generator_version": __version__,
                     "seed": seed,
                     "catalog_sha256": fingerprint,
+                    "options": {"count":args.count, "name":args.name, "career":args.career,
+                                "abilities":args.abilities, "random_name":args.random_name},
                     "characters": [c.to_dict() for c in characters],
                 },
                 ensure_ascii=False,
