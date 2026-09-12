@@ -31,6 +31,7 @@ class WebTests(unittest.TestCase):
         with self.assertRaises(urllib.error.HTTPError) as caught:
             urllib.request.urlopen(self.url + "/api/generate?count=999")
         self.assertEqual(caught.exception.code, 400)
+        caught.exception.close()
 
     def test_static_assets_and_security_headers(self):
         for asset in ["/", "/app.js", "/style.css"]:
@@ -44,11 +45,13 @@ class WebTests(unittest.TestCase):
             with self.assertRaises(urllib.error.HTTPError) as caught:
                 urllib.request.urlopen(self.url + "/api/generate?" + query)
             self.assertEqual(caught.exception.code, 400)
+            caught.exception.close()
 
     def test_traversal_cannot_read_catalog_files(self):
         with self.assertRaises(urllib.error.HTTPError) as caught:
             urllib.request.urlopen(self.url + "/../data/careers.json")
         self.assertEqual(caught.exception.code, 404)
+        caught.exception.close()
 
     def test_foreign_host_is_rejected(self):
         request = urllib.request.Request(
@@ -57,3 +60,4 @@ class WebTests(unittest.TestCase):
         with self.assertRaises(urllib.error.HTTPError) as caught:
             urllib.request.urlopen(request)
         self.assertEqual(caught.exception.code, 403)
+        caught.exception.close()
