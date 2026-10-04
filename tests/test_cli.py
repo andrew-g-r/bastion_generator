@@ -20,12 +20,22 @@ class CLITests(unittest.TestCase):
         )
 
     def test_manifest_includes_generation_options(self):
-        result = self.run_cli('generate','--manifest','--career','11','--random-name','--abilities','8','9','10')
+        result = self.run_cli(
+            "generate",
+            "--manifest",
+            "--career",
+            "11",
+            "--random-name",
+            "--abilities",
+            "8",
+            "9",
+            "10",
+        )
         data = json.loads(result.stdout)
-        self.assertEqual(data['options']['career'],'11')
-        self.assertEqual(data['options']['abilities'],[8,9,10])
-        self.assertTrue(data['options']['random_name'])
-        self.assertEqual(self.run_cli('generate','--manifest','--party-summary').returncode,2)
+        self.assertEqual(data["options"]["career"], "11")
+        self.assertEqual(data["options"]["abilities"], [8, 9, 10])
+        self.assertTrue(data["options"]["random_name"])
+        self.assertEqual(self.run_cli("generate", "--manifest", "--party-summary").returncode, 2)
 
     def test_manifest_records_a_reusable_seed(self):
         result = self.run_cli("generate", "--manifest")

@@ -46,7 +46,15 @@ class fail:
         self.job_prompt1, self.job_prompt2 = c.prompts
         self.job_answer1, self.job_answer2 = c.answers
         table_rolls = [
-            [int(next(key for key, value in self.job_data["tables"][f"table{i+1}"].items() if value == answer))]
+            [
+                int(
+                    next(
+                        key
+                        for key, value in self.job_data["tables"][f"table{i + 1}"].items()
+                        if value == answer
+                    )
+                )
+            ]
             for i, answer in enumerate(c.answers)
         ]
         self.stats = (c.career_id, list(c.abilities), [c.hp], [c.money], *table_rolls)

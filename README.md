@@ -47,7 +47,7 @@ import random
 from bastion.generator import generate
 from bastion.party import generate_party
 
-character = generate('Mira', rng=random.Random(42))
+character = generate("Mira", rng=random.Random(42))
 party = generate_party(4, seed=42)
 ```
 
@@ -56,6 +56,9 @@ party = generate_party(4, seed=42)
 ## Development
 
 ```sh
+python3 -m pip install -r requirements-dev.txt
+ruff check .
+ruff format --check .
 python3 -m unittest discover -s tests -v
 python3 -m pip wheel --no-deps . -w dist
 ```
